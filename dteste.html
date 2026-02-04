@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIZET | Diagnóstico</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configurações Tailwind (Mesma da Home) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vizet: {
+                            base: '#1A1A1A',      
+                            text: '#555555',      
+                            light: '#F6F6F6',     
+                            card: '#F0F0F0',      
+                            pill: '#E5E5E5',     
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter Tight', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'tightest': '-0.05em',
+                        'tighter': '-0.03em',
+                    },
+                    borderRadius: {
+                        '3xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* --- TYPOGRAPHY --- */
+        .rhode-head {
+            font-family: 'Inter Tight', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            text-transform: lowercase;
+            line-height: 1.0;
+        }
+        
+        /* --- COMPONENTS --- */
+        .btn-pill {
+            border-radius: 9999px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .btn-pill:hover {
+            transform: scale(1.02);
+        }
+
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-btn {
+            transition: all 0.3s ease;
+        }
+        .option-btn:hover {
+            border-color: #1A1A1A;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-white text-vizet-base antialiased min-h-screen flex flex-col">
+
+    <!-- Header Minimalista -->
+    <header class="py-6 fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex flex-col leading-none group items-start">
+                <img src="assets/logoextensa.png" alt="Vizet" class="h-4 object-contain filter brightness-0" />
+            </a>
+            <a href="index.html" class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors">
+                <i class="fas fa-times text-lg"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Quiz Container -->
+    <main class="flex-grow flex items-center justify-center p-6 pt-24 bg-white">
+        <div class="w-full max-w-2xl">
+            
+            <!-- Card Principal -->
+            <div class="bg-[#F6F6F6] rounded-3xl p-8 md:p-16 relative overflow-hidden min-h-[500px] flex flex-col justify-center">
+                
+                <!-- Barra de Progresso Minimalista -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gray-200">
+                    <div id="quiz-progress" class="h-full bg-black transition-all duration-500 w-0"></div>
+                </div>
+
+                <!-- Intro Screen -->
+                <div id="intro-step" class="text-center fade-in">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6 block">Consultoria Capilar</span>
+                    <h1 class="rhode-head text-4xl md:text-6xl mb-6 text-black">descubra sua <br> rotina ideal</h1>
+                    <p class="text-gray-500 text-base md:text-lg mb-10 leading-relaxed font-light max-w-md mx-auto">
+                        Responda a 3 perguntas rápidas e nossa inteligência indicará o ritual de tratamento perfeito para o seu cabelo.
+                    </p>
+                    <button onclick="startQuiz()" class="btn-pill px-10 py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800">
+                        Começar
+                    </button>
+                </div>
+
+                <!-- Question Screen -->
+                <div id="question-step" class="hidden fade-in w-full">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6 block text-center">Passo <span id="step-number">1</span>/3</span>
+                    <h2 id="question-title" class="rhode-head text-3xl md:text-4xl text-black mb-10 text-center">Pergunta</h2>
+                    <div id="options-container" class="grid gap-3 max-w-lg mx-auto">
+                        <!-- Opções injetadas via JS -->
+                    </div>
+                </div>
+
+                <!-- Result Screen -->
+                <div id="result-step" class="hidden text-center fade-in">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-4 block">Seu Ritual Vizet</span>
+                    <h2 class="rhode-head text-4xl md:text-5xl text-black mb-6">o match perfeito: <br> <span id="result-name" class="text-gray-400"></span></h2>
+                    
+                    <div class="bg-white p-8 rounded-2xl mb-10 shadow-sm border border-gray-100">
+                        <p id="result-description" class="text-gray-600 text-sm leading-relaxed mb-0"></p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                        <a id="shop-link" href="#" target="_blank" class="btn-pill px-10 py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 min-w-[200px]">
+                            Comprar Agora
+                        </a>
+                        <button onclick="resetQuiz()" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors border-b border-transparent hover:border-black pb-1">
+                            Refazer Teste
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-8 text-center text-[10px] text-gray-300 uppercase tracking-widest bg-white">
+        &copy; 2026 Vizet Profissional
+    </footer>
+
+    <!-- Quiz Logic (Preservada) -->
+    <script>
+        const questions = [
+            {
+                id: 'tipo',
+                title: "qual é a textura do seu cabelo?",
+                options: [
+                    { label: "Liso ou Levemente Ondulado", value: "liso" },
+                    { label: "Ondulado com Frizz", value: "ondulado" },
+                    { label: "Cacheado ou Crespo", value: "cacheado" },
+                    { label: "Quimicamente Alisado", value: "alisado" }
+                ]
+            },
+            {
+                id: 'condicao',
+                title: "como está a saúde dos fios?",
+                options: [
+                    { label: "Saudável, apenas manutenção", value: "saudavel" },
+                    { label: "Ressecado e sem brilho", value: "seco" },
+                    { label: "Quebradiço (pós-química)", value: "danificado" },
+                    { label: "Loiro com tons amarelados", value: "loiro" }
+                ]
+            },
+            {
+                id: 'desejo',
+                title: "o que você deseja melhorar?",
+                options: [
+                    { label: "Crescimento e Força", value: "crescimento" },
+                    { label: "Definição e Nutrição", value: "definicao" },
+                    { label: "Reconstrução Profunda", value: "reconstrucao" },
+                    { label: "Brilho e Finalização", value: "finalizacao" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+
+        function startQuiz() {
+            document.getElementById('intro-step').classList.add('hidden');
+            document.getElementById('question-step').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-title').innerText = q.title;
+            document.getElementById('step-number').innerText = currentQuestion + 1;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            // Update Progress
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                // Estilo atualizado dos botões de opção
+                btn.className = "option-btn w-full text-left p-5 bg-white border border-transparent rounded-xl hover:shadow-md transition-all duration-300 group flex justify-between items-center";
+                btn.innerHTML = `
+                    <span class="font-sans font-medium text-gray-600 group-hover:text-black lowercase text-sm">${opt.label}</span>
+                    <i class="fas fa-chevron-right text-gray-300 group-hover:text-black text-xs opacity-0 group-hover:opacity-100 transition-all"></i>
+                `;
+                btn.onclick = () => selectOption(opt.value);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(value) {
+            answers[questions[currentQuestion].id] = value;
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('question-step').classList.add('hidden');
+            document.getElementById('result-step').classList.remove('hidden');
+            document.getElementById('quiz-progress').style.width = '100%';
+
+            let result = { name: "ritual home care", desc: "A linha perfeita para manutenção diária, garantindo hidratação equilibrada e brilho para todos os tipos de cabelo.", link: "https://www.vizet.com.br/" };
+
+            if (answers.desejo === 'crescimento') {
+                result = { name: "cresce forte", desc: "Fórmula exclusiva para fortalecer a raiz, combater a queda e acelerar o crescimento saudável dos fios.", link: "https://www.vizet.com.br/" };
+            } else if (answers.tipo === 'cacheado' || answers.desejo === 'definicao') {
+                result = { name: "curly", desc: "Nutrição intensa e definição memorável para cachos e crespos, com controle total do frizz.", link: "https://www.vizet.com.br/" };
+            } else if (answers.condicao === 'loiro') {
+                result = { name: "platinize", desc: "Matização inteligente que remove tons amarelados enquanto trata profundamente os fios descoloridos.", link: "https://www.vizet.com.br/" };
+            } else if (answers.condicao === 'danificado' || answers.desejo === 'reconstrucao') {
+                result = { name: "absolute repair", desc: "Reconstrução molecular para cabelos extremamente danificados. Recupera a massa e a elasticidade do fio.", link: "https://www.vizet.com.br/" };
+            } else if (answers.desejo === 'finalizacao') {
+                result = { name: "splendidus", desc: "O toque final de luxo. Óleos preciosos para nutrição, proteção térmica e brilho espelhado.", link: "https://www.vizet.com.br/" };
+            }
+
+            document.getElementById('result-name').innerText = result.name;
+            document.getElementById('result-description').innerText = result.desc;
+            document.getElementById('shop-link').href = result.link;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            document.getElementById('result-step').classList.add('hidden');
+            document.getElementById('intro-step').classList.remove('hidden');
+            document.getElementById('quiz-progress').style.width = '0%';
+        }
+    </script>
+</body>
+</html>
