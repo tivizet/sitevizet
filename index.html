@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIZET PROFISSIONAL | Excellence in Hair Care</title>
+    <title>VIZET</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fontes Google -->
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Inter Tight para replicar a vibe "Grotesque" da Rhode -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
     
     <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,21 +24,22 @@
                 extend: {
                     colors: {
                         vizet: {
-                            base: '#0F4957',   
-                            dark: '#082f36',
-                            accent: '#C5A059', 
-                            light: '#E8EBE9',
+                            base: '#1A1A1A',      /* Preto Suave */
+                            text: '#555555',      /* Cinza Médio */
+                            light: '#F6F6F6',     /* Fundo "Rhode" */
+                            card: '#F0F0F0',      /* Card levemente mais escuro */
+                            pill: '#E5E5E5',      /* Cinza para tags */
                         }
                     },
                     fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    transitionDuration: {
-                        '2000': '2000ms',
+                        sans: ['Inter Tight', 'sans-serif'],
                     },
                     letterSpacing: {
-                        'widest-xl': '0.3em',
+                        'tightest': '-0.05em',
+                        'tighter': '-0.03em',
+                    },
+                    borderRadius: {
+                        '3xl': '2rem',
                     }
                 }
             }
@@ -47,102 +49,11 @@
     <style>
         /* --- CORE STYLES --- */
         body {
-            overflow-x: hidden;
+            background-color: #ffffff;
+            color: #1A1A1A;
         }
 
-        /* --- SCROLL PROGRESS BAR --- */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: transparent;
-            z-index: 100;
-        }
-        .progress-bar {
-            height: 3px;
-            background: #C5A059;
-            width: 0%;
-            transition: width 0.1s ease-out;
-        }
-
-        /* --- SCROLL ANIMATIONS --- */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        
-        .reveal-in {
-            opacity: 0;
-            transition: all 1.5s ease-out;
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .active {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
-        
-        /* --- LOADER --- */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background-color: #0F4957;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
-        }
-        
         /* --- UTILS --- */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.0);
-            backdrop-filter: blur(0px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.5s ease;
-        }
-        
-        .glass-nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-
-        .scrolled .nav-text { color: #0F4957; }
-        .scrolled .nav-logo { color: #0F4957; }
-        .scrolled .logo-sub { color: #666; }
-        .scrolled .nav-icon { color: #0F4957; }
-        
-        .hover-underline-animation {
-            position: relative;
-        }
-        .hover-underline-animation::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: currentColor;
-            transform-origin: bottom right;
-            transition: transform 0.4s ease-out;
-        }
-        .hover-underline-animation:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -151,675 +62,770 @@
             scrollbar-width: none;
         }
 
-        /* Mobile Menu Transition */
-        #mobile-menu {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* --- TYPOGRAPHY --- */
+        .rhode-head {
+            font-family: 'Inter Tight', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            text-transform: lowercase;
+            line-height: 1.0;
+        }
+        
+        .rhode-text {
+            font-family: 'Inter Tight', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
-        /* Floating Diagnostic Button */
-        #floating-diag {
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
+        /* --- COMPONENTS --- */
+        .btn-pill {
+            border-radius: 9999px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        #floating-diag.visible {
+        .btn-pill:hover {
+            transform: scale(1.02);
+            background-color: #E5E5E5;
+            color: black;
+        }
+
+        .product-card {
+            background-color: #F6F6F6;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        /* No novo design, removemos o translate do card inteiro para focar na troca de imagem interna, 
+           mas podemos manter um leve lift se desejar. Vou suavizar. */
+        .product-card:hover {
+            transform: translateY(0px); 
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .active {
             opacity: 1;
             transform: translateY(0);
-            pointer-events: auto;
         }
 
-        /* Animação de Brilho do Texto */
-        @keyframes shine {
-            from { background-position: 0% center; }
-            to { background-position: 200% center; }
-        }
-        .animate-text-shine {
-            background-size: 200% auto;
-            animation: shine 4s linear infinite;
-        }
-
-        /* --- HEADLINE SHINE (usado em: 'Beleza que vem de dentro') --- */
-        .headline-shine {
-            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(197,160,89,1) 45%, rgba(255,255,255,1) 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            animation: shine 3s linear infinite;
-        }
-
-        /* --- TYPOING CARET (aparecendo durante a digitação) --- */
-        .typing-caret {
-            padding-right: 6px;
-            border-right: 2px solid rgba(255,255,255,0.95);
-            animation: blinkCaret 0.8s steps(1) infinite;
-        }
-
-        @keyframes blinkCaret {
-            0% { border-color: transparent; }
-            50% { border-color: rgba(255,255,255,0.95); }
-            100% { border-color: transparent; }
-        }
-
-        /* --- RADIUS THEME (aplica-se a botões, fotos e cards) --- */
-        :root { --radius-apple: 14px; }
-
-        /* Tornar os blocos do carrossel arredondados sem alterar cada bloco */
-        #product-scroll .relative.w-full.aspect-square {
-            border-radius: var(--radius-apple);
-            overflow: hidden;
-        }
-
-        /* Classe utilitária para imagens que precisam de cantos arredondados */
-        .rounded-apple-img { 
-            border-radius: var(--radius-apple);
-            display: block;
-        }
-
-        /* Cards (Ciência e Resultados) */
-        .rounded-apple-card { 
-            border-radius: calc(var(--radius-apple) * 1.3);
-            overflow: hidden;
+        /* Navbar Blur */
+        .nav-blur {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
     </style>
 </head>
-<body class="bg-white text-gray-800 antialiased selection:bg-vizet-base selection:text-white relative">
+<body class="antialiased selection:bg-gray-200 selection:text-black">
 
-    <!-- 0. SCROLL PROGRESS -->
-    <div class="progress-container">
-        <div class="progress-bar" id="myBar"></div>
-    </div>
+    <!-- HEADER -->
+    <header id="navbar" class="fixed w-full z-50 py-4 transition-all duration-300 nav-blur border-b border-transparent">
+        <div class="container mx-auto px-6 md:px-8 flex justify-between items-center">
+            <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
 
-    <!-- 1. LOADER -->
-    <div id="loader">
-        <div class="text-center">
-            <img src="assets/logoextensa.png" alt="Vizet Profissional" class="mx-auto h-10 md:h-12 object-contain animate-pulse" />
-        </div>
-    </div>
-
-    <!-- 2. HEADER -->
-    <header id="navbar" class="fixed w-full z-50 py-8 glass-nav">
-        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center group relative z-50">
-                <img src="assets/logoextensa.png" alt="Vizet Profissional" class="h-8 md:h-10 object-contain" />
-            </a>
-
-            <!-- Nav Links (Desktop) -->
-            <nav class="hidden md:flex items-center space-x-12">
-                <a href="#manifesto" class="nav-text text-xs font-medium tracking-[0.2em] uppercase text-white hover-underline-animation transition-colors duration-500">A Marca</a>
-                <a href="diagnostico.html" class="nav-text text-xs font-medium tracking-[0.2em] uppercase text-white hover-underline-animation transition-colors duration-500 text-vizet-accent">Diagnóstico</a>
-                <a href="#product-lines" class="nav-text text-xs font-medium tracking-[0.2em] uppercase text-white hover-underline-animation transition-colors duration-500">Linhas</a>
-                <a href="#results" class="nav-text text-xs font-medium tracking-[0.2em] uppercase text-white hover-underline-animation transition-colors duration-500">Resultados</a>
-                <a href="#shop" class="ml-4 px-6 py-2 border border-vizet-accent text-vizet-accent text-xs tracking-[0.2em] uppercase hover:bg-vizet-accent hover:text-white transition-all duration-300 rounded-full">Loja</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#manifesto" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors lowercase tracking-wide">a marca</a>
+                <a href="dteste.html" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors lowercase tracking-wide">diagnóstico</a>
+                <a href="#product-lines" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors lowercase tracking-wide">linhas</a>
+                <a href="#results" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors lowercase tracking-wide">resultados</a>
             </nav>
 
-            <!-- Mobile Button -->
-            <button id="mobile-menu-btn" class="md:hidden nav-icon text-white text-xl focus:outline-none transition-colors duration-500 relative z-50">
-                <i class="fas fa-bars"></i>
-            </button>
+            <a href="index.html" class="absolute left-1/2 -translate-x-1/2 flex items-center">
+                <img src="assets/logoextensa.png" alt="Vizet" class="h-5 md:h-6 object-contain filter brightness-0" />
+            </a>
+
+            <div class="flex items-center gap-6">
+                <a href="#shop" class="text-[13px] font-medium text-gray-600 hover:text-black lowercase hidden md:block">shop</a>
+                <a href="pro.html" class="text-[13px] font-medium text-gray-600 hover:text-black lowercase hidden md:block">pro</a>
+            </div>
         </div>
     </header>
 
-    <!-- 2.5 MOBILE MENU OVERLAY -->
-    <div id="mobile-menu" class="fixed inset-0 bg-vizet-base z-40 transform translate-x-full flex flex-col justify-center items-center text-center">
-        <nav class="flex flex-col space-y-8">
-            <a href="#manifesto" class="text-white text-xl font-serif tracking-[0.2em] hover:text-vizet-accent transition-colors mobile-link">A Marca</a>
-            <a href="diagnostico.html" class="text-vizet-accent text-xl font-serif tracking-[0.2em] border border-vizet-accent px-6 py-2 mobile-link">Fazer Diagnóstico</a>
-            <a href="#product-lines" class="text-white text-xl font-serif tracking-[0.2em] hover:text-vizet-accent transition-colors mobile-link">Linhas</a>
-            <a href="#results" class="text-white text-xl font-serif tracking-[0.2em] hover:text-vizet-accent transition-colors mobile-link">Resultados</a>
-            <a href="#shop" class="text-white text-xl font-serif tracking-[0.2em] border-b border-vizet-accent pb-1 mobile-link">Loja Online</a>
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 transform -translate-x-full transition-transform duration-500 ease-in-out pt-24 px-6 flex flex-col items-center text-center">
+        <nav class="flex flex-col space-y-6 w-full">
+            <a href="#manifesto" class="rhode-head text-4xl text-black border-b border-gray-100 pb-4">a marca</a>
+            <a href="dteste.html" class="rhode-head text-4xl text-black border-b border-gray-100 pb-4">diagnóstico</a>
+            <a href="#product-lines" class="rhode-head text-4xl text-black border-b border-gray-100 pb-4">linhas</a>
+            <a href="#results" class="rhode-head text-4xl text-black border-b border-gray-100 pb-4">resultados</a>
+            <a href="pro.html" class="rhode-head text-4xl text-black border-b border-gray-100 pb-4">pro</a>
+            <a href="#shop" class="rhode-head text-4xl text-black pb-4">shop</a>
         </nav>
-        <div class="absolute bottom-10 left-0 w-full text-center text-white/30 text-[10px] uppercase tracking-widest">
-            <img src="assets/logoextensa.png" alt="Vizet Profissional" class="mx-auto h-6 object-contain opacity-40" />
-        </div>
+        <button id="close-menu" class="absolute top-6 right-6 text-2xl"><i class="fas fa-times"></i></button>
     </div>
 
-    <!-- 2.6 FLOATING DIAGNOSTIC BUTTON -->
-    <a href="diagnostico.html" id="floating-diag" class="fixed bottom-8 right-8 z-30 bg-vizet-accent hover:bg-vizet-base text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all duration-300 hover:scale-105 group">
-        <span class="text-xs font-bold uppercase tracking-widest hidden md:block">Descubra seu Produto</span>
-        <i class="fas fa-search text-lg group-hover:animate-pulse"></i>
-    </a>
-
-    <!-- 3. HERO -->
-    <section class="relative h-screen w-full overflow-hidden">
-        <div class="absolute inset-0 bg-vizet-base">
-            <!-- Agora busca pginicial.jpg, com fallback para o Unsplash se não encontrar -->
-            <img src="assets/modelos-vizet.jpg" 
-                 class="w-full h-full object-cover opacity-40 mix-blend-overlay animate-[ping_1s_ease-in-out_infinite] scale-100 transition-transform duration-[20s] hover:scale-110 origin-center" 
-                 style="animation: none; transform: scale(1.0); transition: transform 20s ease-out;"
-                 onload="this.style.transform='scale(1.1)'"
-                 alt="Hero Texture"
-                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop'">
-            <div class="absolute inset-0 bg-gradient-to-b from-vizet-dark/30 to-vizet-base/90"></div>
-        </div>
-
-        <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-            <p class="reveal-up text-vizet-accent text-xs md:text-sm tracking-[0.4em] uppercase mb-6" style="transition-delay: 200ms;">Est. 2012</p>
-            <h1 class="reveal-up text-white font-serif text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 font-light" style="transition-delay: 400ms;">
-                    Beleza <span id="headline-typing" class="italic font-normal headline-shine" data-text="que vem de dentro" aria-label="que vem de dentro"></span>
+    <main class="pt-0">
+        
+        <!-- HERO SECTION -->
+        <section class="relative h-screen w-full overflow-hidden flex items-end pb-20 md:items-center md:pb-0 justify-center bg-[#F6F6F6]">
+            <div class="absolute inset-0 z-0">
+                <!-- VIDEO HERO: Substitua o 'src' pelo caminho do seu vídeo quando estiver no VSCode -->
+                <video autoplay loop muted playsinline class="w-full h-full object-cover object-center" poster="assets/modelos-vizet.jpg">
+                    <source src="assets/video-hero.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+            </div>
             
-            <p class="reveal-up text-gray-300 text-sm font-light tracking-wide max-w-md leading-loose mb-10" style="transition-delay: 600ms;">
-                Ativos altamente concentrados para uma verdadeira experiência de transformação capilar.
-            </p>
-
-            <!-- CTAs -->
-            <div class="reveal-up flex flex-col md:flex-row gap-6" style="transition-delay: 800ms;">
-                <a href="diagnostico.html" class="px-8 py-3 bg-vizet-accent text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-vizet-base transition-all duration-300 shadow-lg hover:shadow-vizet-accent/50 rounded-full">
-                    Fazer Diagnóstico
-                </a>
-                <a href="https://materiais.vizet.com.br/" target="_blank" class="px-8 py-3 border border-white/30 text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-white/10 hover:border-white transition-all duration-300 rounded-full">
-                    Sou Profissional
-                </a>
-            </div>
-        </div>
-
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center reveal-in" style="transition-delay: 1500ms;">
-            <span class="text-[10px] text-white/50 uppercase tracking-widest mb-3">Scroll</span>
-            <div class="w-px h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
-        </div>
-    </section>
-
-    <!-- 3.5 PROVA SOCIAL -->
-    <section class="py-12 bg-vizet-dark border-b border-white/5">
-        <div class="container mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                <div class="reveal-up">
-                    <span class="block text-2xl md:text-3xl font-serif text-white mb-1">+12</span>
-                    <span class="text-[10px] uppercase tracking-widest text-vizet-accent">Anos de Mercado</span>
-                </div>
-                <div class="reveal-up" style="transition-delay: 100ms;">
-                    <span class="block text-2xl md:text-3xl font-serif text-white mb-1">300k+</span>
-                    <span class="text-[10px] uppercase tracking-widest text-vizet-accent">Atendimentos</span>
-                </div>
-                <div class="reveal-up" style="transition-delay: 200ms;">
-                    <span class="block text-2xl md:text-3xl font-serif text-white mb-1">Brasil</span>
-                    <span class="text-[10px] uppercase tracking-widest text-vizet-accent">Distribuição Nacional</span>
-                </div>
-                <div class="reveal-up" style="transition-delay: 300ms;">
-                    <span class="block text-2xl md:text-3xl font-serif text-white mb-1">100%</span>
-                    <span class="text-[10px] uppercase tracking-widest text-vizet-accent">Vegano</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. MANIFESTO -->
-    <section id="manifesto" class="py-32 bg-white">
-        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-            <div class="reveal-left relative aspect-[3/4] md:aspect-[4/5] overflow-hidden flex items-center justify-center bg-gray-50 p-6 min-h-[320px] rounded-2xl">
-                <img src="./assets/modelo-pginicial.jpg" 
-                     alt="Produto Destaque Vizet" 
-                     class="relative z-10 w-full h-full object-cover transition-all duration-1000 ease-out"
-                     onerror="this.onerror=null; this.src='assets/marca-placeholder.svg'">
-            </div>
-
-            <div>
-                <div class="reveal-up">
-                    <span class="text-vizet-base text-xs font-bold tracking-[0.3em] uppercase block mb-4">Nossa Essência</span>
-                    <h2 class="text-4xl md:text-5xl font-serif text-vizet-base leading-tight mb-8">
-                        Mais do que cosméticos, <br>
-                        <span class="italic text-vizet-accent">somos especialistas.</span>
-                    </h2>
-                    <div class="space-y-6 text-gray-500 font-light leading-relaxed text-sm md:text-base text-justify">
-                        <p>
-                            Nossa jornada começa nos laboratórios de Encantado, RS, onde químicos e especialistas em tricologia trabalham em sinergia. Não seguimos tendências passageiras; criamos protocolos de tratamento fundamentados na ciência.
-                        </p>
-                        <p>
-                            Cada frasco que sai de nossa indústria carrega o compromisso de quem entende que o cabelo é parte fundamental da identidade de cada pessoa. Da escolha da matéria-prima ao resultado no salão, a Vizet é feita por pessoas apaixonadas por beleza.
-                        </p>
-                    </div>
+            <div class="relative z-10 w-full px-6 text-center md:text-left md:px-12 md:max-w-7xl mx-auto flex flex-col md:flex-row items-end md:items-end justify-between gap-8">
+                <div class="reveal-up text-white w-full md:w-auto text-center md:text-left">
+                    <p class="text-white/80 text-xs font-bold tracking-[0.2em] uppercase mb-4">Est. 2012</p>
+                    <h1 class="rhode-head text-6xl md:text-[8rem] leading-[0.85] mb-6 text-shadow-sm">
+                        beleza que <br> vem de dentro
+                    </h1>
+                    <p class="text-white/90 text-base md:text-lg font-light tracking-wide mb-8 md:mb-0 max-w-md leading-relaxed">
+                        Ativos altamente concentrados para uma verdadeira experiência de transformação capilar.
+                    </p>
                 </div>
                 
-                <div class="mt-12">
-                    <a href="#science" class="inline-block border-b border-vizet-base pb-1 text-vizet-base text-xs font-bold uppercase tracking-widest hover:text-vizet-accent hover:border-vizet-accent transition-colors">
-                        Conheça nossos processos
+                <div class="reveal-up w-full md:w-auto flex flex-col md:flex-row gap-4">
+                    <a href="dteste.html" class="btn-pill block w-full md:w-auto text-center bg-white text-black px-10 py-4 text-xs font-bold tracking-widest uppercase hover:bg-gray-100">
+                        Diagnóstico
+                    </a>
+                    <a href="https://www.vizet.com.br/" target="_blank" class="btn-pill block w-full md:w-auto text-center bg-white/10 backdrop-blur-md border border-white/30 text-white px-10 py-4 text-xs font-bold tracking-widest uppercase hover:bg-white/20">
+                        Loja Online
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 4.5 DIAGNÓSTICO (SECTION) -->
-    <section id="diagnostic" class="py-24 bg-vizet-light relative overflow-hidden">
-        <div class="absolute right-0 top-0 w-1/3 h-full bg-vizet-accent/10 skew-x-12 transform translate-x-20"></div>
-        <div class="container mx-auto px-6 md:px-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div class="md:w-1/2 reveal-up">
-                <span class="text-vizet-accent text-xs font-bold tracking-[0.3em] uppercase block mb-4">Consultoria Capilar</span>
-                <h2 class="text-3xl md:text-4xl font-serif text-vizet-base mb-6">Qual o tratamento ideal para o seu cabelo?</h2>
-                <p class="text-gray-500 font-light mb-8 max-w-md">
-                    Cada fio é único. Nossos especialistas desenvolveram um guia rápido para ajudar você a encontrar a linha perfeita para sua necessidade.
-                </p>
-                <a href="diagnostico.html" class="px-8 py-3 bg-vizet-base text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-vizet-accent transition-all duration-300 shadow-lg rounded-full">
-                    Fazer Diagnóstico Rápido
-                </a>
+        <!-- STATS BAR (PROVA SOCIAL) -->
+        <section class="py-16 bg-white border-b border-gray-100">
+            <div class="container mx-auto px-6">
+                 <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 divide-x divide-transparent md:divide-gray-100 text-center">
+                    <div class="reveal-up">
+                        <h4 class="rhode-head text-3xl md:text-4xl text-black mb-1">12+</h4>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500">anos de mercado</p>
+                    </div>
+                    <div class="reveal-up" style="transition-delay: 50ms;">
+                        <h4 class="rhode-head text-3xl md:text-4xl text-black mb-1">300k+</h4>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500">atendimentos</p>
+                    </div>
+                     <div class="reveal-up" style="transition-delay: 100ms;">
+                        <h4 class="rhode-head text-3xl md:text-4xl text-black mb-1">br</h4>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500">distribuição nacional</p>
+                    </div>
+                     <div class="reveal-up" style="transition-delay: 150ms;">
+                        <h4 class="rhode-head text-3xl md:text-4xl text-black mb-1">100%</h4>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500">vegano</p>
+                    </div>
+                 </div>
             </div>
-            <div class="md:w-1/2 relative reveal-up" style="transition-delay: 200ms;">
-                <div class="aspect-video bg-white/50 backdrop-blur-sm border border-white/50 flex items-center justify-center relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500 rounded-2xl">
-                    <img src="assets/diagnostico.jpg" alt="Diagnóstico Capilar" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                    onerror="this.style.opacity='0'; this.parentElement.innerHTML+='<div class=\'absolute inset-0 flex items-center justify-center text-vizet-base/30 text-xs uppercase tracking-widest\'>diagnostico.jpg</div>'">
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-vizet-base shadow-lg group-hover:scale-110 transition-transform">
-                            <i class="fas fa-search"></i>
+        </section>
+
+        <!-- MANIFESTO SECTION (Restored Text, New Design) -->
+        <section id="manifesto" class="py-24 bg-[#F6F6F6]">
+            <div class="container mx-auto px-6 md:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+                    <!-- Image Block -->
+                    <div class="reveal-up relative aspect-[4/5] rounded-2xl overflow-hidden bg-gray-200">
+                        <img src="./assets/modelo-pginicial.jpg" class="w-full h-full object-cover" 
+                             alt="Vizet Lab"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1556228720-19de777f975e?q=80&w=2070&auto=format&fit=crop'">
+                        <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-full">
+                            <span class="text-[10px] uppercase tracking-widest font-bold">Encantado, RS</span>
+                        </div>
+                    </div>
+
+                    <!-- Text Block -->
+                    <div class="reveal-up">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6 block">Nossa Essência</span>
+                        <h2 class="rhode-head text-4xl md:text-6xl text-black mb-8 leading-[1.1]">
+                            mais do que cosméticos, <span class="text-gray-400">somos especialistas.</span>
+                        </h2>
+                        <div class="space-y-6 text-gray-600 font-light text-base md:text-lg leading-relaxed">
+                            <p>
+                                Nossa jornada começa nos laboratórios de Encantado, RS, onde químicos e especialistas em tricologia trabalham em sinergia. Não seguimos tendências passageiras; criamos protocolos de tratamento fundamentados na ciência.
+                            </p>
+                            <p>
+                                Cada frasco que sai de nossa indústria carrega o compromisso de quem entende que o cabelo é parte fundamental da identidade de cada pessoa. Da escolha da matéria-prima ao resultado no salão, a Vizet é feita por pessoas apaixonadas por beleza.
+                            </p>
+                        </div>
+                        <div class="mt-10">
+                            <a href="#science" class="text-xs font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">
+                                Conheça nossos processos
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 6. LINHA DE PRODUTOS -->
-    <section id="product-lines" class="py-32 bg-white overflow-hidden">
-        <div class="container mx-auto px-6 md:px-12 text-center mb-16 reveal-up">
-            <h2 class="text-4xl font-serif text-vizet-base mb-6">Soluções Completas</h2>
-            <p class="text-gray-500 font-light text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                Navegue por nossas linhas especializadas, desenvolvidas para cada tipo de necessidade capilar.
-            </p>
-        </div>
+        <!-- DIAGNOSTIC SECTION (Bento Grid) -->
+        <section id="diagnostic" class="py-24 bg-white">
+            <div class="container mx-auto px-6 md:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- Large Text Box -->
+                    <div class="md:col-span-7 bg-[#F6F6F6] rounded-3xl p-10 md:p-16 flex flex-col justify-center items-start reveal-up">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-4 block">Consultoria Capilar</span>
+                        <h3 class="rhode-head text-3xl md:text-5xl mb-6 text-black">qual o tratamento ideal para o seu cabelo?</h3>
+                        <p class="text-gray-600 text-base mb-10 leading-relaxed max-w-md">
+                            Cada fio é único. Nossos especialistas desenvolveram um guia rápido para ajudar você a encontrar a linha perfeita para sua necessidade.
+                        </p>
+                        <a href="dteste.html" class="btn-pill bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-gray-800">
+                            Fazer Diagnóstico
+                        </a>
+                    </div>
 
-        <div class="container mx-auto px-6 md:px-12 relative">
-            <!-- Setas de Navegação -->
-            <button class="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full border border-vizet-base/10 bg-white text-vizet-base flex items-center justify-center hover:bg-vizet-base hover:text-white transition-all duration-300 hidden md:flex reveal-left shadow-lg" onclick="document.getElementById('product-scroll').scrollBy({left: -300, behavior: 'smooth'})">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full border border-vizet-base/10 bg-white text-vizet-base flex items-center justify-center hover:bg-vizet-base hover:text-white transition-all duration-300 hidden md:flex reveal-left shadow-lg" style="transition-delay: 100ms;" onclick="document.getElementById('product-scroll').scrollBy({left: 300, behavior: 'smooth'})">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+                    <!-- Image Box -->
+                    <div class="md:col-span-5 bg-gray-200 rounded-3xl overflow-hidden min-h-[300px] relative reveal-up group cursor-pointer">
+                        <img src="assets/produtos-vizet (1).jpg" class="w-full h-full object-cover absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                             alt="Textura Diagnostico"
+                            class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-search text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <!-- Carrossel Atualizado com TODAS as Linhas -->
-            <div id="product-scroll" class="flex overflow-x-auto gap-8 pb-12 pt-4 px-4 md:px-12 no-scrollbar snap-x snap-mandatory">
+        <!-- ALL PRODUCTS CAROUSEL (Updated Rhode Style) -->
+        <section id="product-lines" class="py-24 bg-white overflow-hidden">
+            <div class="container mx-auto px-6 md:px-8 mb-12 flex justify-between items-end reveal-up">
+                <div>
+                    <h2 class="rhode-head text-4xl md:text-5xl text-black mb-2">shop lines</h2>
+                    <p class="text-gray-500 text-sm">Soluções completas para cada necessidade capilar.</p>
+                </div>
+                
+                <div class="hidden md:flex gap-3">
+                    <button id="scroll-left" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors text-black"><i class="fas fa-arrow-left"></i></button>
+                    <button id="scroll-right" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors text-black"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Scroll Track -->
+            <div id="product-track" class="flex overflow-x-auto gap-4 px-6 md:px-8 pb-12 no-scrollbar snap-x snap-mandatory">
                 
                 <!-- 1. Absolute -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#c5a059]/20 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[50%_50%_30%_70%/60%_40%_70%_30%] group-hover:scale-110 group-hover:rotate-6"></div>
-                        <img src="assets/produto-absolute.jpg" alt="Absolute" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Absolute</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <!-- Conteúdo Fixo (Header) -->
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black transition-colors duration-300">absolute</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Reconstrução</span>
+                        </div>
+
+                        <!-- Imagem 1: Produto (Estado Padrão) -->
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="assets/produto-absolute.jpg" alt="Absolute" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+
+                        <!-- Imagem 2: Modelo (Estado Hover) -->
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines1.jpg" alt="Absolute Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595185856475-485dd47b4200?q=80&w=1974&auto=format&fit=crop'">
+                        </div>
+
+                        <!-- Botão Compre Agora (Estado Hover) -->
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">
+                                Compre Agora
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Absolute</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Reconstrução</span>
                 </div>
 
-                <!-- 2. B-TOX -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:-rotate-3"></div>
-                        <img src="produto-btox.png" alt="B-TOX" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>B-TOX</div>'">
+                <!-- 2. B-Tox -->
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">b-tox</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Alinhamento</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-btox.png" alt="B-Tox" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines2.jpg" alt="B-Tox Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">B-TOX</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Alinhamento</span>
                 </div>
 
                 <!-- 3. Backstage Hidratação -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#c5a059]/20 rounded-[50%_50%_20%_80%/25%_80%_20%_75%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="assets/produto-backstage-hidratacao.jpg" alt="Backstage Hidratação" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50 text-center\'>Backstage<br>Hidratação</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black leading-none">backstage<br><span class="text-lg font-sans font-medium text-gray-400 tracking-normal">hidratação</span></h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="assets/produto-backstage-hidratacao.jpg" alt="Backstage H" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines3.jpg" alt="Backstage H Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors text-center">Backstage<br>Hidratação</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Hidratação Profissional</span>
                 </div>
 
                 <!-- 4. Backstage Nutrição -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[50%_50%_30%_70%/60%_40%_70%_30%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-backstage-nutricao.png" alt="Backstage Nutrição" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50 text-center\'>Backstage<br>Nutrição</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                             <h3 class="rhode-head text-3xl text-black leading-none">backstage<br><span class="text-lg font-sans font-medium text-gray-400 tracking-normal">nutrição</span></h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-backstage-nutricao.png" alt="Backstage N" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines4.jpg" alt="Backstage N Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1552698621-358b6ebf4d42?q=80&w=1969&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors text-center">Backstage<br>Nutrição</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Nutrição Profissional</span>
                 </div>
 
-                <!-- 5. Body Splash e Loção -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#c5a059]/20 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="produto-body-splash.png" alt="Body Splash e Loção" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50 text-center\'>Body Care</div>'">
+                <!-- 5. Body Care -->
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">body care</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Pele</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-body-splash.png" alt="Body Care" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines5.jpg" alt="Body Care Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1512207128881-1baee8727218?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors text-center">Body Care</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Cuidados com a Pele</span>
                 </div>
 
                 <!-- 6. Brave -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[50%_50%_20%_80%/25%_80%_20%_75%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="produto-brave.png" alt="Brave" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Brave</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">brave</h3>
+                            <span class="text-[10px] font-bold bg-black text-white px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Men</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-brave.png" alt="Brave" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines6.jpg" alt="Brave Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Brave</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Linha Masculina</span>
                 </div>
 
                 <!-- 7. Colorfill -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[50%_50%_20%_80%/25%_80%_20%_75%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-colorfill.png" alt="Colorfill" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Colorfill</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">colorfill</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Cor</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-colorfill.png" alt="Colorfill" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines7.jpg" alt="Colorfill Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1628100508544-7f154d81615f?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Colorfill</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Coloração</span>
                 </div>
 
                 <!-- 8. Cresce Forte -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-6"></div>
-                        <img src="produto-cresceforte.png" alt="Cresce Forte" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Cresce Forte</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">cresce forte</h3>
+                            <span class="text-[10px] font-bold bg-black text-white px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Bestseller</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-cresceforte.png" alt="Cresce Forte" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines8.jpg" alt="Cresce Forte Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1596482381272-9b51e5069949?q=80&w=1888&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Cresce Forte</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Fortalecimento</span>
                 </div>
 
                 <!-- 9. Curly -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#c5a059]/20 rounded-[50%_50%_20%_80%/25%_80%_20%_75%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:-rotate-3"></div>
-                        <img src="produto-curly.png" alt="Curly" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Curly</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">curly</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Cachos</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-curly.png" alt="Curly" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines9.jpg" alt="Curly Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1594270410221-e6a33cbc6fb9?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Curly</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Cachos</span>
                 </div>
 
                 <!-- 10. Intensive -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-intensive.png" alt="Intensive" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Intensive</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">intensive</h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-intensive.png" alt="Intensive" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines10.jpg" alt="Intensive Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1492106087820-71f1a45d2b88?q=80&w=1974&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Intensive</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Tratamento Intensivo</span>
                 </div>
 
                 <!-- 11. Óleo Milenar -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="produto-oleo.png" alt="Óleo Milenar" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Óleo Milenar</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">óleo milenar</h3>
+                            <span class="text-[10px] font-bold bg-[#E8EBE9] text-gray-600 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Luxe</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-oleo.png" alt="Oleo" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines11.jpg" alt="Oleo Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1627918544975-d97e74360e53?q=80&w=1965&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Óleo Milenar</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Nutrição e Brilho</span>
                 </div>
 
                 <!-- 12. Pistache -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[50%_50%_20%_80%/25%_80%_20%_75%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:-rotate-3"></div>
-                        <img src="produto-pistache.png" alt="Pistache" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Pistache</div>'">
+                <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">pistache</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Edição Especial</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-pistache.png" alt="Pistache" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines12.jpg" alt="Pistache Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=2574&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Pistache</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Edição Especial</span>
                 </div>
-
+                
                 <!-- 13. Platinize -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[50%_50%_30%_70%/60%_40%_70%_30%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-platinize.png" alt="Platinize" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Platinize</div>'">
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">platinize</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Blond</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-platinize.png" alt="Platinize" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines13.jpg" alt="Platinize Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1596700593453-6ce7f6a75f28?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Platinize</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Matizador</span>
                 </div>
 
                 <!-- 14. Pro-Z -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="produto-proz.png" alt="Pro-Z" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Pro-Z</div>'">
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">pro-z</h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-proz.png" alt="Pro-Z" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines14.jpg" alt="Pro-Z Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1601055903647-87e122de871f?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Pro-Z</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Finalizador</span>
                 </div>
 
                 <!-- 15. Ritual -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-ritual.png" alt="Ritual" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Ritual</div>'">
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">ritual</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Home Care</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-ritual.png" alt="Ritual" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines15.jpg" alt="Ritual Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571781565036-d3f7595ca3bb?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Ritual</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Home Care</span>
                 </div>
 
                 <!-- 16. Sabonetes -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="produto-sabonetes.png" alt="Sabonetes" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Sabonetes</div>'">
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">sabonetes</h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-sabonetes.png" alt="Sabonetes" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines16.jpg" alt="Sabonetes Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1584305574647-03a2173df26b?q=80&w=2070&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Sabonetes</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Higiene</span>
                 </div>
 
                 <!-- 17. Selagem -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[50%_50%_30%_70%/60%_40%_70%_30%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-selagem.png" alt="Selagem" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Selagem</div>'">
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">selagem</h3>
+                            <span class="text-[10px] font-bold bg-white/80 backdrop-blur text-gray-500 px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">Transform</span>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-selagem.png" alt="Selagem" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines17.jpg" alt="Selagem Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=2080&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Selagem</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Transformação</span>
                 </div>
 
-                <!-- 18. Splendidus Mar e Piscina -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="produto-splendidus-mar.png" alt="Splendidus Mar" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50 text-center\'>Splendidus<br>Mar e Piscina</div>'">
+                 <!-- 18. Splendidus Mar -->
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black leading-none">splendidus<br><span class="text-lg font-sans font-medium text-gray-400 tracking-normal">mar</span></h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-splendidus-mar.png" alt="Splendidus Mar" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines18.jpg" alt="Splendidus Mar Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545912452-8aea7e25a3d3?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors text-center">Splendidus<br>Mar e Piscina</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Proteção Solar</span>
                 </div>
 
                 <!-- 19. Splendidus Proteção -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#c5a059]/20 rounded-[50%_50%_20%_80%/25%_80%_20%_75%] transition-all duration-700 ease-in-out group-hover:rounded-[70%_30%_30%_70%/60%_40%_60%_40%] group-hover:scale-110 group-hover:-rotate-6"></div>
-                        <img src="produto-splendidus-protecao.png" alt="Splendidus Proteção" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50 text-center\'>Splendidus<br>Proteção</div>'">
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black leading-none">splendidus<br><span class="text-lg font-sans font-medium text-gray-400 tracking-normal">proteção</span></h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="produto-splendidus-protecao.png" alt="Splendidus Protecao" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines19.jpg" alt="Splendidus Prot Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551024601-56296352560f?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors text-center">Splendidus<br>Proteção</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Finalização Premium</span>
                 </div>
 
-                <!-- 20. Supreme -->
-                <div class="min-w-[200px] md:min-w-[240px] snap-center flex flex-col items-center group cursor-pointer reveal-up">
-                    <div class="relative w-full aspect-square mb-6 flex items-center justify-center">
-                        <div class="absolute w-[80%] h-[80%] bg-gradient-to-br from-[#e0e7e4] to-[#0F4957]/10 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] transition-all duration-700 ease-in-out group-hover:rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:scale-110 group-hover:rotate-3"></div>
-                        <img src="placeholder-supreme.png" alt="Supreme" class="relative z-10 w-[60%] h-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:-translate-y-4 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'relative z-10 text-[10px] font-bold uppercase tracking-widest text-vizet-base/50\'>Supreme</div>'">
+                 <!-- 20. Supreme -->
+                 <div class="min-w-[280px] md:min-w-[320px] snap-center reveal-up">
+                    <div class="product-card rounded-2xl relative aspect-[4/5] bg-[#F6F6F6] group cursor-pointer overflow-hidden border border-transparent hover:border-gray-100">
+                        <div class="absolute top-6 left-6 right-6 flex justify-between items-start z-30 pointer-events-none">
+                            <h3 class="rhode-head text-3xl text-black">supreme</h3>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-500 group-hover:opacity-0 z-10">
+                            <img src="placeholder-supreme.png" alt="Supreme" class="w-[80%] h-auto object-contain drop-shadow-xl" onerror="this.style.opacity='0.5'">
+                        </div>
+                        <div class="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <img src="assets/modelo-lines20.jpg" alt="Supreme Modelo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1887&auto=format&fit=crop'">
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <button class="w-full bg-white text-black font-bold text-xs uppercase py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors">Compre Agora</button>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-serif font-bold text-vizet-base group-hover:text-vizet-accent transition-colors">Supreme</h3>
-                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Alisamento Profissional</span>
                 </div>
 
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 5. CIÊNCIA / EXPERTISE -->
-    <section id="science" class="py-24 bg-vizet-light relative overflow-hidden">
-        <div class="container mx-auto px-6 md:px-12 text-center mb-16 reveal-up">
-            <span class="text-vizet-base text-xs font-bold tracking-[0.3em] uppercase block mb-4">Laboratórios Vizet</span>
-            <h2 class="text-3xl md:text-4xl font-serif text-vizet-base">Ciência e Segurança</h2>
-        </div>
-
-        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="reveal-up bg-white p-10 hover:shadow-xl transition-all duration-700 group border-t-4 border-transparent hover:border-vizet-accent rounded-2xl">
-                <div class="mb-6 text-vizet-base text-3xl opacity-50 group-hover:opacity-100 transition-all duration-500">
-                    <i class="fas fa-atom"></i>
-                </div>
-                <h3 class="text-lg font-serif font-bold text-gray-900 mb-3">Nanotecnologia</h3>
-                <p class="text-gray-500 font-light text-sm leading-relaxed">
-                    Moléculas reduzidas para penetração profunda no córtex, garantindo tratamento real de dentro para fora.
-                </p>
+        <!-- SCIENCE SECTION (Restored) -->
+        <section id="science" class="py-24 bg-[#F6F6F6]">
+            <div class="container mx-auto px-6 md:px-8 text-center mb-16">
+                <h2 class="rhode-head text-4xl md:text-5xl text-black">ciência & segurança</h2>
             </div>
-
-            <!-- Card 2 -->
-            <div class="reveal-up bg-white p-10 hover:shadow-xl transition-all duration-700 group border-t-4 border-transparent hover:border-vizet-accent rounded-2xl" style="transition-delay: 200ms;">
-                <div class="mb-6 text-vizet-base text-3xl opacity-50 group-hover:opacity-100 transition-all duration-500">
-                    <i class="fas fa-leaf"></i>
-                </div>
-                <h3 class="text-lg font-serif font-bold text-gray-900 mb-3">Ativos Naturais</h3>
-                <p class="text-gray-500 font-light text-sm leading-relaxed">
-                    Priorizamos matérias-primas de origem vegetal. 100% livre de testes em animais e parabenos.
-                </p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="reveal-up bg-white p-10 hover:shadow-xl transition-all duration-700 group border-t-4 border-transparent hover:border-vizet-accent rounded-2xl" style="transition-delay: 400ms;">
-                <div class="mb-6 text-vizet-base text-3xl opacity-50 group-hover:opacity-100 transition-all duration-500">
-                    <i class="fas fa-flask"></i>
-                </div>
-                <h3 class="text-lg font-serif font-bold text-gray-900 mb-3">P&D Próprio</h3>
-                <p class="text-gray-500 font-light text-sm leading-relaxed">
-                    Controle total de qualidade em nossa indústria, garantindo a eficácia de cada lote produzido.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6.5 RESULTADOS REAIS (Atualizado) -->
-    <section id="results" class="py-32 bg-vizet-base text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-10"></div>
-        
-        <div class="container mx-auto px-6 md:px-12 relative z-10">
-            <div class="flex flex-col md:flex-row gap-16 items-center">
-                <div class="md:w-1/2 reveal-up">
-                    <span class="text-vizet-accent text-xs font-bold tracking-[0.3em] uppercase block mb-4">Alta Performance</span>
-                    <h2 class="text-4xl md:text-5xl font-serif mb-6">A potência da verdadeira transformação.</h2>
-                    <p class="text-gray-300 font-light mb-8 leading-relaxed">
-                        A Vizet une tecnologia de ponta e ingredientes nobres para entregar resultados que superam expectativas. Nossos produtos agem profundamente na fibra capilar, devolvendo força, brilho e maciez instantaneamente. Quem usa Vizet, descobre o poder de um cabelo verdadeiramente saudável.
-                    </p>
-                    <a href="https://www.vizet.com.br/" target="_blank" class="inline-block border-b border-vizet-accent pb-1 text-vizet-accent text-xs font-bold uppercase tracking-widest hover:text-white hover:border-white transition-colors">
-                        Experimente a mudança
-                    </a>
-                </div>
+            <div class="container mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="md:w-1/2 reveal-left relative">
-                    <!-- Foto Única de Transformação (Com Aspect Ratio fixo para reservar espaço) -->
-                    <div class="relative group overflow-hidden border-4 border-white/5 shadow-2xl aspect-[3/4] md:aspect-[4/5] bg-vizet-dark/50 rounded-2xl">
-                        <!-- Placeholder visual para o fundo -->
-                        <div class="absolute inset-0 border-2 border-dashed border-white/20 flex items-center justify-center z-0 p-6 min-h-[320px]">
-                            <span class="text-white/30 text-sm font-bold uppercase tracking-widest">transformacao.jpg — Espaço reservado</span>
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-10 flex flex-col items-center text-center hover:shadow-sm transition-shadow">
+                    <div class="text-4xl text-gray-300 mb-6"><i class="fas fa-atom"></i></div>
+                    <h3 class="rhode-head text-2xl text-black mb-4">nanotecnologia</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Moléculas reduzidas para penetração profunda no córtex, garantindo tratamento real de dentro para fora.
+                    </p>
+                </div>
+
+                 <!-- Card 2 -->
+                 <div class="bg-white rounded-2xl p-10 flex flex-col items-center text-center hover:shadow-sm transition-shadow">
+                    <div class="text-4xl text-gray-300 mb-6"><i class="fas fa-leaf"></i></div>
+                    <h3 class="rhode-head text-2xl text-black mb-4">ativos naturais</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Priorizamos matérias-primas de origem vegetal. 100% livre de testes em animais e parabenos.
+                    </p>
+                </div>
+
+                 <!-- Card 3 -->
+                 <div class="bg-white rounded-2xl p-10 flex flex-col items-center text-center hover:shadow-sm transition-shadow">
+                    <div class="text-4xl text-gray-300 mb-6"><i class="fas fa-flask"></i></div>
+                    <h3 class="rhode-head text-2xl text-black mb-4">p&d próprio</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                          Controle total de qualidade em nossa indústria, garantindo a eficácia de cada lote produzido.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION (Restored & Styled) -->
+        <section id="results" class="py-24 bg-white">
+            <div class="container mx-auto px-6 md:px-8">
+                <div class="bg-[#1A1A1A] rounded-3xl overflow-hidden relative">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')]"></div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row gap-12 items-center p-10 md:p-20">
+                        <div class="md:w-1/2">
+                            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6 block">Alta Performance</span>
+                            <h2 class="rhode-head text-4xl md:text-6xl text-white mb-8 leading-[1.1]">
+                                a potência da <br> verdadeira transformação.
+                            </h2>
+                            <p class="text-gray-400 font-light text-base md:text-lg mb-10 leading-relaxed max-w-lg">
+                                A Vizet une tecnologia de ponta e ingredientes nobres para entregar resultados que superam expectativas. Nossos produtos agem profundamente na fibra capilar, devolvendo força, brilho e maciez instantaneamente.
+                            </p>
+                            <a href="https://www.vizet.com.br/" target="_blank" class="text-white text-xs font-bold uppercase tracking-widest border-b border-white pb-1 hover:text-gray-300 hover:border-gray-300 transition-colors">
+                                Experimente a mudança
+                            </a>
                         </div>
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-vizet-dark/80 to-transparent opacity-60 z-20 pointer-events-none"></div>
-                        
-                        <!-- IMAGEM: transformacao.jpg -->
-                        <img src="./assets/transformacao.jpg" alt="Mulher com cabelo transformado por Vizet" class="relative z-10 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        onerror="this.onerror=null; this.src='assets/transformacao-placeholder.svg'">
-                        
-                        <div class="absolute bottom-8 left-8 z-30 pointer-events-none">
-                            <p class="text-white font-serif text-2xl italic mb-1">Vizet Effect</p>
-                            <p class="text-vizet-accent text-[10px] uppercase tracking-widest">Beleza Real</p>
+                        <div class="md:w-1/2 w-full">
+                            <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 relative group">
+                                <img src="./assets/transformacao2.jpg" alt="Vizet Results" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                onerror="this.onerror=null; this.src='assets/transformacao-placeholder.svg'">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 8. NEWSLETTER -->
-    <section class="py-24 bg-vizet-light border-t border-gray-200">
-        <div class="container mx-auto px-6 text-center reveal-up">
-            <h3 class="text-xl font-serif text-vizet-base mb-6">Vizet Insider</h3>
-            <p class="text-gray-500 text-sm mb-8 font-light max-w-md mx-auto">Cadastre-se para receber lançamentos, conteúdos educativos e ofertas exclusivas para profissionais.</p>
-            <form class="max-w-md mx-auto flex flex-col md:flex-row gap-4">
-                <input type="email" placeholder="Seu e-mail profissional" class="flex-1 bg-transparent border-b border-vizet-base/20 py-3 text-vizet-base placeholder-vizet-base/40 focus:outline-none focus:border-vizet-accent transition-colors" required>
-                <button type="submit" class="text-xs font-bold uppercase tracking-widest text-vizet-base hover:text-vizet-accent transition-colors py-3 px-6 rounded-full">
-                    Inscrever-se
-                </button>
-            </form>
-        </div>
-    </section>
+        <!-- FOOTER -->
+        <footer class="bg-[#F6F6F6] pt-20 pb-10">
+            <div class="container mx-auto px-6 md:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-24 gap-12">
+                    
+                    <div class="w-full md:w-1/3">
+                        <h5 class="rhode-head text-2xl text-black mb-6">vizet insider</h5>
+                        <p class="text-gray-500 text-sm mb-6">Cadastre-se para receber lançamentos e conteúdos educativos.</p>
+                        <form class="flex border-b border-gray-300 pb-2">
+                            <input type="email" placeholder="Email Address" class="bg-transparent w-full outline-none text-black placeholder-gray-400 text-sm">
+                            <button type="submit" class="text-xs font-bold uppercase text-gray-500 hover:text-black">Join</button>
+                        </form>
+                    </div>
 
-    <!-- 9. SHOP & FOOTER (Espaçamento corrigido) -->
-    <section id="shop" class="py-24 bg-vizet-base text-white text-center relative">
-        <div class="absolute inset-0 bg-black/5"></div>
-        <div class="relative z-10 container mx-auto px-6">
-            <!-- Texto Atualizado com Animação -->
-            <h2 class="reveal-up text-4xl md:text-6xl font-serif mb-10 leading-tight">
-                Descubra a Origem da <br>
-                <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-white to-[#C5A059] animate-text-shine">Verdadeira Beleza</span>
-            </h2>
-            
-            <a href="https://www.vizet.com.br/" target="_blank" class="reveal-up inline-block px-10 py-4 border border-white/30 hover:bg-white hover:text-vizet-base transition-all duration-300 text-xs font-bold uppercase tracking-[0.2em] rounded-full">
-                Loja Online
-            </a>
-            <div class="reveal-up mt-8">
-                <a href="https://materiais.vizet.com.br/" target="_blank" class="text-[10px] text-vizet-accent border-b border-vizet-accent/30 pb-1 hover:text-white transition-colors uppercase tracking-widest">
-                    Acessar Portal do Lojista
-                </a>
+                    <div class="flex gap-16 md:gap-24">
+                        <div>
+                            <h6 class="font-bold text-xs uppercase tracking-widest text-black mb-6">Explore</h6>
+                            <ul class="space-y-4">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-black lowercase transition-colors">linhas</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-black lowercase transition-colors">diagnóstico</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-black lowercase transition-colors">profissional</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h6 class="font-bold text-xs uppercase tracking-widest text-black mb-6">Social</h6>
+                            <ul class="space-y-4">
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-black lowercase transition-colors">instagram</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-black lowercase transition-colors">tiktok</a></li>
+                                <li><a href="#" class="text-[13px] text-gray-500 hover:text-black lowercase transition-colors">contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between items-end border-t border-gray-200 pt-10">
+                    <img src="assets/Logcinza.png" alt="Vizet" class="h-[4rem] md:h-[10rem] w-auto -ml-2 select-none pointer-events-none object-contain">
+                    <div class="flex flex-col md:flex-row gap-6 text-[10px] text-gray-400 uppercase tracking-widest mt-6 md:mt-0">
+                        <a href="#" class="hover:text-black">Privacy Policy</a>
+                        <a href="#" class="hover:text-black">Terms of Use</a>
+                        <span>&copy; 2026 Vizet</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </footer>
 
-    <footer class="bg-vizet-dark text-white/60 py-12 border-t border-white/5 text-[10px] uppercase tracking-widest">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p>&copy; 2026 Vizet</p>
-            <div class="flex gap-8">
-                <a href="https://www.instagram.com/vizetpro/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram</a>
-                <a href="https://www.facebook.com/vizetpro?locale=pt_BR" target="_blank" rel="noopener" class="hover:text-white transition-colors">Facebook</a>
-                <a href="#" class="hover:text-white transition-colors">Contato</a>
-            </div>
-        </div>
-    </footer>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Loader
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.remove();
-                    // Start the headline typing only after the loader is fully removed
-                    if (typeof runHeadlineTyping === 'function') runHeadlineTyping();
-                }, 500);
-            }, 2300);
-
-            // Mobile Menu
             const mobileBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu');
             const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            let isMenuOpen = false;
 
             function toggleMenu() {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    mobileMenu.classList.remove('translate-x-full');
-                    mobileBtn.innerHTML = '<i class="fas fa-times"></i>';
+                const isOpen = !mobileMenu.classList.contains('-translate-x-full');
+                if (isOpen) {
+                    mobileMenu.classList.add('-translate-x-full');
                 } else {
-                    mobileMenu.classList.add('translate-x-full');
-                    mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    mobileMenu.classList.remove('-translate-x-full');
                 }
             }
 
             mobileBtn.addEventListener('click', toggleMenu);
-            mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+            closeMenuBtn.addEventListener('click', toggleMenu);
 
-            // Navbar & Scroll Animation
             const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                }
+            });
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -828,42 +834,16 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.reveal-up, .reveal-left, .reveal-in').forEach(el => observer.observe(el));
-
-            // Typing effect for headline (will be triggered after loader finishes)
-            function runHeadlineTyping(){
-                const el = document.getElementById('headline-typing');
-                if (!el) return;
-                const text = el.dataset.text ? el.dataset.text.trim() : '';
-                if (!text) return;
-                // Ensure empty to avoid flash and add caret
-                el.textContent = '';
-                el.classList.add('typing-caret');
-                const speed = 60; // ms per character
-                const startDelay = 200; // small delay after loader is removed
-                setTimeout(() => {
-                    let i = 0;
-                    const t = setInterval(() => {
-                        el.textContent += text.charAt(i);
-                        i++;
-                        if (i >= text.length) {
-                            clearInterval(t);
-                            // remove caret after a small pause (keeps shine)
-                            setTimeout(() => el.classList.remove('typing-caret'), 600);
-                        }
-                    }, speed);
-                }, startDelay);
-            }
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+            
+            const track = document.getElementById('product-track');
+            document.getElementById('scroll-left').addEventListener('click', () => {
+                track.scrollBy({ left: -350, behavior: 'smooth' });
+            });
+            document.getElementById('scroll-right').addEventListener('click', () => {
+                track.scrollBy({ left: 350, behavior: 'smooth' });
             });
         });
     </script>
 </body>
 </html>
-
